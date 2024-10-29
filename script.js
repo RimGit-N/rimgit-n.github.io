@@ -7,83 +7,49 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault(); // Mencegah link dibuka secara default
         const currentLinkHref = this.href;
 
-        // Ukuran pop-up
-        const popUpWidth = 400;
-        const popUpHeight = 200;
+        // Membuat modal
+        const modal = document.createElement("div");
+        modal.style.position = "fixed";
+        modal.style.top = 0;
+        modal.style.left = 0;
+        modal.style.width = "100%";
+        modal.style.height = "100%";
+        modal.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+        modal.style.display = "flex";
+        modal.style.alignItems = "center";
+        modal.style.justifyContent = "center";
+        modal.style.zIndex = 1000; // Pastikan modal di atas elemen lain
+        modal.innerHTML = `
+                  <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; position: relative;">
+                      <p>Where do you want to open this link?</p>
+                      <button id="blank">New Tab (Blank)</button>
+                      <button id="parent">Parent Frame</button>
+                      <button id="top">Full Window (Top)</button>
+                      <button id="cancel">Cancel</button>
+                  </div>
+              `;
 
-        // Menghitung posisi tengah layar dan lebih ke atas
-        const screenLeft =
-          window.screenLeft !== undefined ? window.screenLeft : screen.left;
-        const screenTop =
-          window.screenTop !== undefined ? window.screenTop : screen.top;
-        const screenWidth = window.innerWidth
-          ? window.innerWidth
-          : document.documentElement.clientWidth;
-        const screenHeight = window.innerHeight
-          ? window.innerHeight
-          : document.documentElement.clientHeight;
+        document.body.appendChild(modal);
 
-        const left = screenWidth / 2 - popUpWidth / 2 + screenLeft;
-        const top = 0; // Menggeser ke atas dengan menggunakan screenHeight / 4
+        // Menangani klik tombol
+        modal.querySelector("#blank").addEventListener("click", function () {
+          window.open(currentLinkHref, "_blank"); // Buka di tab baru
+          document.body.removeChild(modal); // Tutup modal
+        });
 
-        // Membuat pop-up di tengah bagian atas layar
-        const popUp = window.open(
-          "",
-          "popup",
-          `width=${popUpWidth},height=${popUpHeight},top=${top},left=${left}`
-        );
+        modal.querySelector("#parent").addEventListener("click", function () {
+          window.open(currentLinkHref, "_parent"); // Buka di bingkai induk
+          document.body.removeChild(modal); // Tutup modal
+        });
 
-        // HTML di dalam pop-up
-        popUp.document.write(`
-            <html>
-              <head>
-                <title>Choose an option</title>
-                <style>
-                  body {
-                    font-family: Arial, sans-serif;
-                    text-align: center;
-                    margin: 30px;
-                  }
-                  button {
-                    margin: 10px;
-                    padding: 10px 20px;
-                    font-size: 16px;
-                    cursor: pointer;
-                  }
-                </style>
-              </head>
-              <body>
-                <p>Where do you want to open this link?</p>
-                <button id="blank">New Tab (Blank)</button>
-                <button id="parent">Parent Frame</button>
-                <button id="top">Full Window (Top)</button>
-                <button id="cancel">Cancel</button>
-                <script>
-                  document.getElementById("blank").addEventListener("click", function () {
-                    window.opener.open('${currentLinkHref}', '_blank'); // Buka di tab baru
-                    window.close(); // Tutup pop-up
-                  });
-  
-                  document.getElementById("parent").addEventListener("click", function () {
-                    window.opener.open('${currentLinkHref}', '_parent'); // Buka di bingkai induk
-                    window.close(); // Tutup pop-up
-                  });
-  
-                  document.getElementById("top").addEventListener("click", function () {
-                    window.opener.open('${currentLinkHref}', '_top'); // Buka di jendela penuh
-                    window.close(); // Tutup pop-up
-                  });
-  
-                  document.getElementById("cancel").addEventListener("click", function () {
-                    window.close(); // Tutup pop-up tanpa tindakan, pengguna tetap di halaman yang sama
-                  });
-                </script>
-              </body>
-            </html>
-          `);
+        modal.querySelector("#top").addEventListener("click", function () {
+          window.open(currentLinkHref, "_top"); // Buka di jendela penuh
+          document.body.removeChild(modal); // Tutup modal
+        });
 
-        // Tutup dokumen pop-up untuk memastikan seluruh konten dimuat
-        popUp.document.close();
+        modal.querySelector("#cancel").addEventListener("click", function () {
+          document.body.removeChild(modal); // Tutup modal tanpa tindakan
+        });
       });
     });
   } else {

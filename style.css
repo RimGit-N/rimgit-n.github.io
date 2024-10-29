@@ -169,35 +169,70 @@ footer {
 
 /* Style for modal */
 .modal {
-  display: none; /* Hidden by default */
+  display: flex; /* Menampilkan modal dengan flex */
   position: fixed;
   z-index: 1001;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Sedikit lebih gelap untuk meningkatkan kontras */
+  justify-content: center; /* Mengatur konten modal ke tengah */
+  align-items: center; /* Mengatur konten modal ke tengah vertikal */
 }
 
 .modal-content {
-  background-color: #fff;
-  margin: 15% auto;
-  padding: 20px;
-  border-radius: 10px;
-  width: 300px;
+  background-color: #ffffff; /* Warna latar belakang modal */
+  padding: 40px; /* Tambahkan padding lebih untuk ruang yang lebih nyaman */
+  border-radius: 15px; /* Sedikit lebih melengkung */
+  width: 600px; /* Ukuran modal lebih besar untuk tampilan yang lebih baik */
+  max-width: 90%; /* Pastikan modal responsif di layar kecil */
   text-align: center;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3); /* Bayangan lebih lembut untuk efek kedalaman */
+  margin: 0 20px; /* Margin untuk memberikan ruang di sisi modal */
 }
 
+/* Style untuk tombol */
 .modal-content button {
-  margin: 10px 5px;
-  padding: 10px 15px;
-  background-color: #ff7f50;
-  color: white;
+  margin: 15px 5px; /* Ruang antar tombol lebih lebar */
+  padding: 15px 25px; /* Padding tombol lebih besar untuk kenyamanan */
   border: none;
-  border-radius: 5px;
+  border-radius: 8px; /* Lebih melengkung untuk tampilan modern */
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s; /* Efek transisi saat hover */
 }
 
+/* Warna tombol */
+#blank {
+  background-color: #4caf50; /* Warna hijau untuk tombol New Tab */
+  color: white;
+}
+
+#parent {
+  background-color: #2196f3; /* Warna biru untuk tombol Parent Frame */
+  color: white;
+}
+
+#top {
+  background-color: #ff9800; /* Warna oranye untuk tombol Full Window */
+  color: white;
+}
+
+#cancel {
+  background-color: #f44336; /* Warna merah untuk tombol Cancel */
+  color: white;
+}
+
+/* Hover effect untuk tombol */
 .modal-content button:hover {
-  background-color: #ff4500;
+  transform: scale(1.05); /* Membesar tombol saat hover */
+}
+
+.modal-content button:active {
+  transform: scale(0.95); /* Menyusut saat tombol ditekan */
 }
