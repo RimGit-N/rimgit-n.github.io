@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.style.justifyContent = "center";
         modal.style.zIndex = 1000; // Pastikan modal di atas elemen lain
         modal.innerHTML = `
-                  <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; position: relative;">
+                  <div style="background: #e277ff; padding: 50px; border-radius: 10px; text-align: center; position: relative; text-color: black;">
                       <p>Where do you want to open this link?</p>
                       <button id="blank">New Tab (Blank)</button>
                       <button id="parent">Parent Frame</button>
