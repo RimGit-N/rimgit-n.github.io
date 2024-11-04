@@ -8,29 +8,25 @@ p {
   padding: 0;
 }
 
-/* General styles */
+/* General body padding-top untuk mode desktop */
 body {
   font-family: "Arial", sans-serif;
   line-height: 1.6;
   background-color: #f0f0f0;
   color: #333;
+  padding-top: 80px; /* Ruang tambahan untuk header pada mode desktop */
 }
 
-/* Fixed Header */
+/* Header */
 header {
   background: #333;
   color: #fff;
   padding: 15px 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  position: fixed; /* Membuat header tetap berada di atas */
+  position: fixed; /* Membuat header tetap berada di atas saat scroll */
   top: 0;
   width: 100%;
   z-index: 1000; /* Memastikan header tetap di atas elemen lain */
-}
-
-/* Adjusting for the fixed header */
-body {
-  padding-top: 80px; /* Beri lebih banyak ruang untuk header agar konten tidak tertutup */
 }
 
 nav {
@@ -143,15 +139,24 @@ footer {
   width: 100%;
 }
 
-/* Responsive Styles */
+/* Responsive - Mode Mobile */
 @media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-    align-items: center;
+  /* Sesuaikan padding-top pada body untuk mode mobile */
+  body {
+    padding-top: 120px; /* Tambahan ruang untuk menghindari tumpang tindih header di mobile */
+  }
+
+  .home-section {
+    margin-top: 20px; /* Tambahkan sedikit jarak pada bagian "Welcome to My Portfolio" */
   }
 
   .profile-image {
     max-width: 100px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -169,35 +174,70 @@ footer {
 
 /* Style for modal */
 .modal {
-  display: none; /* Hidden by default */
+  display: flex; /* Menampilkan modal dengan flex */
   position: fixed;
   z-index: 1001;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Sedikit lebih gelap untuk meningkatkan kontras */
+  justify-content: center; /* Mengatur konten modal ke tengah */
+  align-items: center; /* Mengatur konten modal ke tengah vertikal */
 }
 
+/* Modal content */
 .modal-content {
-  background-color: #fff;
-  margin: 15% auto;
-  padding: 20px;
-  border-radius: 10px;
-  width: 300px;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 15px;
+  width: 600px;
+  max-width: 90%;
   text-align: center;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+  margin: 0 20px;
 }
 
+/* Tombol dalam modal */
 .modal-content button {
-  margin: 10px 5px;
-  padding: 10px 15px;
-  background-color: #ff7f50;
-  color: white;
+  margin: 15px 5px;
+  padding: 15px 25px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
+#blank {
+  background-color: #4caf50;
+  color: white;
+}
+
+#parent {
+  background-color: #2196f3;
+  color: white;
+}
+
+#top {
+  background-color: #ff9800;
+  color: white;
+}
+
+#cancel {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Hover effect untuk tombol */
 .modal-content button:hover {
-  background-color: #ff4500;
+  transform: scale(1.05); /* Membesar tombol saat hover */
+}
+
+.modal-content button:active {
+  transform: scale(0.95); /* Menyusut saat tombol ditekan */
 }
